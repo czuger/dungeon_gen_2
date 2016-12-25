@@ -22,8 +22,10 @@ class Room
     @room_image = @room_image.scale( TILE_SIZE * @w, TILE_SIZE * @h )
   end
 
-  def place( top, left )
-    RoomOnMap.new( self, top, left )
+  def place( top, left, hallways )
+    r = RoomOnMap.new( self, top, left )
+    r.connect_hallway( hallways )
+    r
   end
 
 end

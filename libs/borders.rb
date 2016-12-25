@@ -23,4 +23,8 @@ class Borders
     end
     dunegon_image
   end
+
+  def sample
+    @borders.sample
+  end
 end

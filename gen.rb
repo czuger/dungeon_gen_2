@@ -10,7 +10,7 @@ hallways = Hallways.new( os )
 
 placed_rooms = []
 
-1.upto(5) do
+1.upto(1) do
 
   top = rand( 1 .. 22 )
   left = rand( 1 .. 22 )
@@ -18,7 +18,7 @@ placed_rooms = []
   room = rooms.rand
 
   if os.free_space?( room, top, left )
-    placed_rooms << room.place( top, left )
+    placed_rooms << room.place( top, left, hallways )
   end
 
 end

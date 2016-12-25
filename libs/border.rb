@@ -1,16 +1,14 @@
 class Border
 
-  attr_reader :top, :left
+  attr_reader :top, :left, :side
 
-  def initialize( top, left, border )
+  def initialize( top, left, side )
     @top = top
     @left = left
-    @border = border
+    @side = side
   end
 
   def draw( dungeon_image )
-    p self
-
     gc = Magick::Draw.new
     gc = gc.fill_opacity( 0.35 )
     draw_top = (@top-1)*Room::TILE_SIZE
@@ -27,6 +25,5 @@ class Border
 
     return -1 if @left < border.left
     return 1 if @left > border.left
-
   end
 end
