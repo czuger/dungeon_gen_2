@@ -1,8 +1,11 @@
 require 'rmagick'
 
+require_relative 'room_on_map'
+
 class Room
 
-  attr_reader :w, :h
+  attr_reader :w, :h, :room_image, :occupied_space
+
   include Magick
 
   TILE_SIZE = 100
@@ -19,10 +22,8 @@ class Room
     @room_image = @room_image.scale( TILE_SIZE * @w, TILE_SIZE * @h )
   end
 
-  def draw( dungeon_image, top, left )
-    p [ top, left, self ]
-    @occupied_space.add_room( self, top, left )
-    dungeon_image.composite( @room_image, left * TILE_SIZE, top * TILE_SIZE, OverCompositeOp )
+  def place( top, left )
+    RoomOnMap.new( self, top, left )
   end
 
 end

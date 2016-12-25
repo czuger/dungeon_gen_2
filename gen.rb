@@ -8,21 +8,23 @@ dungeon_image = Magick::Image.new( 30 * Room::TILE_SIZE, 30 * Room::TILE_SIZE )
 rooms = Rooms.new( os )
 hallways = Hallways.new( os )
 
-1.upto(10) do
+placed_rooms = []
+
+1.upto(5) do
 
   top = rand( 1 .. 22 )
   left = rand( 1 .. 22 )
 
-  if rand( 1 .. 2 ) == 1
-    room = rooms.rand
-  else
-    room = hallways.rand
-  end
+  room = rooms.rand
 
   if os.free_space?( room, top, left )
-    dungeon_image = room.draw( dungeon_image, top, left )
+    placed_rooms << room.place( top, left )
   end
 
+end
+
+placed_rooms.each do |pr|
+  dungeon_image = pr.draw( dungeon_image )
 end
 
 dungeon_image.write( 'out/dungeon.jpg' )
