@@ -8,6 +8,8 @@ dungeon_image = Magick::Image.new( 30 * AvailableTile::Base::TILE_SIZE, 30 * Ava
 rooms = AvailablesTilesPool::Rooms.new( os )
 hallways = AvailablesTilesPool::Hallways.new( os )
 
+rooms.set_hallways_pool( hallways )
+
 placed_rooms = []
 
 1.upto(1) do
@@ -18,7 +20,7 @@ placed_rooms = []
   room = rooms.sample
 
   if os.free_space?( room, top, left )
-    placed_rooms << room.place( top, left, hallways )
+    placed_rooms << room.place( top, left )
   end
 
 end

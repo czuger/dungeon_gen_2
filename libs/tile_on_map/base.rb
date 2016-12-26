@@ -1,28 +1,44 @@
 require 'rmagick'
 
-require_relative '../borders'
-
 module TileOnMap
   class Base
 
-    attr_reader :top, :left, :tile
+    attr_reader :top, :left, :w, :h
 
     include Magick
 
-    def initialize( room, top, left )
-      @tile = room
+    def initialize( tile, top, left )
+
       @top = top
       @left = left
 
-      @tile.occupied_space.add_tile(self, top, left )
-      @borders = Borders.new( self )
+      @w = tile.w
+      @h = tile.h
+
+      @hallways_pool = tile.hallways_pool
+      @tile_image = tile.tile_image
+      @occupied_space = tile.occupied_space
+
+      @occupied_space.add_tile(self, top, left )
     end
 
     def draw( dungeon_image )
+
       p self
-      @hallways.each{ |h| dungeon_image = h.draw( dungeon_image ) } if @hallways
-      dungeon_image = dungeon_image.composite(@tile.tile_image, @left * AvailableTile::Base::TILE_SIZE, @top * AvailableTile::Base::TILE_SIZE, OverCompositeOp )
-      @borders.draw( dungeon_image )
+      @hallways&.each{ |h| dungeon_image = h.draw( dungeon_image ) }
+
+      dungeon_image = dungeon_image.composite( @tile_image,
+         @left * AvailableTile::Base::TILE_SIZE,
+         @top * AvailableTile::Base::TILE_SIZE, OverCompositeOp )
+
+      @borders&.draw( dungeon_image )
+
+      dungeon_image
     end
+
+    # def inspect
+    #   { top: @top, left: @left, w: @w, h: @h }
+    # end
+
   end
 end

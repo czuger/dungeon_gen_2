@@ -7,8 +7,8 @@ class OccupiedSpaces
   end
 
   def add_tile( tile_on_map, top, left )
-    0.upto( tile_on_map.tile.w-1 ).each do |uw|
-      0.upto( tile_on_map.tile.h-1 ).each do |uh|
+    0.upto( tile_on_map.w-1 ).each do |uw|
+      0.upto( tile_on_map.h-1 ).each do |uh|
         @occupied_spaces << [ uw+left, uh+top ]
       end
     end
