@@ -1,15 +1,14 @@
-require_relative 'hallway'
-require_relative 'rooms'
-require_relative 'hallway_on_map'
+require_relative '../available_tile/hallway'
+require_relative 'base'
 
-class Hallways < Rooms
+class AvailablesTilesPool::Hallways < AvailablesTilesPool::Base
 
   BORDER_CONV = { top: :bottom, bottom: :top, left: :right, right: :left }
 
   def initialize( occupied_space )
     @hallways = {}
     Dir.glob( 'tiles/hallways/*' ).each do |hallway|
-      h = Hallway.new( hallway, occupied_space )
+      h = AvailableTile::Hallway.new( hallway, occupied_space )
 
       if !h.vertical?
         [ :top, :bottom ].each do |way|
@@ -28,5 +27,4 @@ class Hallways < Rooms
   def choose( border )
     @hallways[ BORDER_CONV[ border.side ] ].sample
   end
-
 end

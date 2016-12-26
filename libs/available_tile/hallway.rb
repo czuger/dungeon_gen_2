@@ -1,6 +1,7 @@
-require_relative 'room'
+require_relative 'base'
+require_relative '../tile_on_map/hallway'
 
-class Hallway < Room
+class AvailableTile::Hallway < AvailableTile::Base
 
   def vertical?
     @h < @w
@@ -15,7 +16,7 @@ class Hallway < Room
     left -= @w if border.side == :left
     left += 1 if border.side == :right
 
-    HallwayOnMap.new( self, top, left )
+    TileOnMap::Hallway.new(self, top, left )
   end
 
 end

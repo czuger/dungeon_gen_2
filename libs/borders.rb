@@ -2,18 +2,18 @@ require_relative 'border'
 
 class Borders
 
-  def initialize( room_on_map )
+  def initialize( tile_on_map )
     @borders = []
 
-    @borders += 2.upto( room_on_map.room.w-1 ).map{ |w| [
-      Border.new( 1 + room_on_map.top, w + room_on_map.left, :top ),
-      Border.new( room_on_map.room.h + room_on_map.top, w + room_on_map.left, :bottom ) ] }.flatten
+    @borders += 2.upto( tile_on_map.tile.w-1 ).map{ |w| [
+      Border.new( 1 + tile_on_map.top, w + tile_on_map.left, :top ),
+      Border.new( tile_on_map.tile.h + tile_on_map.top, w + tile_on_map.left, :bottom ) ] }.flatten
 
-    @borders += 2.upto( room_on_map.room.h-1 ).map{ |h| [
-      Border.new( h + room_on_map.top, 1 + room_on_map.left, :left ),
-      Border.new( h + room_on_map.top, room_on_map.room.w + room_on_map.left, :right ) ] }.flatten
+    @borders += 2.upto( tile_on_map.tile.h-1 ).map{ |h| [
+      Border.new( h + tile_on_map.top, 1 + tile_on_map.left, :left ),
+      Border.new( h + tile_on_map.top, tile_on_map.tile.w + tile_on_map.left, :right ) ] }.flatten
 
-    # # @borders += 2.upto( room_on_map.h-2 ).map{ |h| [ Border.new( h, 1 ), Border.new( h, room_on_map.w ) ] }.flatten
+    # # @borders += 2.upto( tile_on_map.h-2 ).map{ |h| [ Border.new( h, 1 ), Border.new( h, tile_on_map.w ) ] }.flatten
     @borders.sort!
   end
 

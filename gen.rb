@@ -1,12 +1,12 @@
 require 'pp'
-require_relative 'libs/rooms'
-require_relative 'libs/hallways'
+require_relative 'libs/availables_tiles_pool/rooms'
+require_relative 'libs/availables_tiles_pool/hallways'
 require_relative 'libs/occupied_spaces'
 
 os = OccupiedSpaces.new
-dungeon_image = Magick::Image.new( 30 * Room::TILE_SIZE, 30 * Room::TILE_SIZE )
-rooms = Rooms.new( os )
-hallways = Hallways.new( os )
+dungeon_image = Magick::Image.new( 30 * AvailableTile::Base::TILE_SIZE, 30 * AvailableTile::Base::TILE_SIZE )
+rooms = AvailablesTilesPool::Rooms.new( os )
+hallways = AvailablesTilesPool::Hallways.new( os )
 
 placed_rooms = []
 
@@ -15,7 +15,7 @@ placed_rooms = []
   top = rand( 1 .. 22 )
   left = rand( 1 .. 22 )
 
-  room = rooms.rand
+  room = rooms.sample
 
   if os.free_space?( room, top, left )
     placed_rooms << room.place( top, left, hallways )
