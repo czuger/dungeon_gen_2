@@ -23,4 +23,8 @@ class OccupiedSpaces
     true
   end
 
+  def inspect
+    { object: self.class.to_s, occupied_spaces_count: @occupied_spaces.count }
+  end
+
 end
