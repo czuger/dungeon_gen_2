@@ -21,7 +21,7 @@ left = dungeon_width / 2 - room.w / 2+  rand( - room.w .. room.w )
 
 placed_rooms << room.place( top, left )
 
-nb_rooms = 6
+nb_rooms = 10
 infinite_loop_protection = 1000
 
 while nb_rooms > 0 and infinite_loop_protection > 0
