@@ -1,6 +1,6 @@
 require_relative 'base'
 
-require_relative '../borders'
+require_relative 'borders'
 
 class TileOnMap::Room < TileOnMap::Base
 
