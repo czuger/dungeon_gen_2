@@ -14,9 +14,9 @@ class OccupiedSpaces
     end
   end
 
-  def free_space?( tile, top, left )
-    0.upto( tile.w-1 ).each do |uw|
-      0.upto( tile.h-1 ).each do |uh|
+  def free_space?( tile, top, left, min_space_around = 0 )
+    (-min_space_around).upto( tile.w+min_space_around-1 ).each do |uw|
+      (-min_space_around).upto( tile.h+min_space_around-1 ).each do |uh|
         return false if @occupied_spaces.include?( [ uw+left, uh+top ] )
       end
     end
