@@ -9,12 +9,12 @@ class TileOnMap::Room < TileOnMap::Base
     @borders = Borders.new( self )
   end
 
-  def connect_hallway
+  def connect_hallway( occupied_space, hallways_pool )
     @hallways ||= []
 
     border = @borders.sample
 
-    hallway = @hallways_pool.choose( border )
+    hallway = hallways_pool.choose( border )
 
     if @occupied_space.free_space?( hallway, top, left )
       @hallways << h.place( border )

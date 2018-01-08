@@ -46,8 +46,33 @@ class Dungeon
 
   def place_room( room, top, left )
     r = TileOnMap::Room.new( @occupied_spaces, room, top, left )
-    # r.connect_hallway
+    connect_hallway( r )
     @tiles << r
+  end
+
+  def place_hallway( border )
+    top = border.top - 1
+    left = border.left - 1
+
+    top -= @h if border.side == :top
+    top += 1 if border.side == :bottom
+    left -= @w if border.side == :left
+    left += 1 if border.side == :right
+
+    TileOnMap::Hallway.new(self, top, left )
+  end
+
+  def connect_hallway( room )
+    @hallways ||= []
+
+    border = @borders.sample
+
+    hallway = @availables_hallways.choose( border )
+
+    if @occupied_space.free_space?( hallway, top, left )
+      @tiles << h.place( border )
+    end
+
   end
 
 end
