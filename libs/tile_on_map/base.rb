@@ -22,16 +22,16 @@ module TileOnMap
       @occupied_space.add_tile(self, top, left )
     end
 
-    def draw( dungeon_image )
+    def draw( dungeon_image, decal_top, decal_left )
 
       p self
       @hallways&.each{ |h| dungeon_image = h.draw( dungeon_image ) }
 
       dungeon_image = dungeon_image.composite( @tile_image,
-         @left * 2 * AvailableTile::Base::TILE_SIZE,
-         @top * 2 * AvailableTile::Base::TILE_SIZE, OverCompositeOp )
+         ( @left + decal_left ) * 2 * AvailableTile::Base::TILE_SIZE,
+         ( @top + decal_top ) * 2 * AvailableTile::Base::TILE_SIZE, OverCompositeOp )
 
-      @borders&.draw( dungeon_image )
+      # @borders&.draw( dungeon_image )
 
       dungeon_image
     end
