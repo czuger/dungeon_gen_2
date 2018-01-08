@@ -9,10 +9,9 @@ module AvailableTile
 
     TILE_SIZE = 100
 
-    def initialize( tile, occupied_space )
+    def initialize( tile )
 
       @tile_image = ImageList.new( tile ).first
-      @occupied_space = occupied_space
 
       fname = File.basename( tile )
       m = fname.match( /(\d)_(\d)/ )

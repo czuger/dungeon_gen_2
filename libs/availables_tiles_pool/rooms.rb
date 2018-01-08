@@ -4,11 +4,14 @@ require_relative '../available_tile/room'
 module AvailablesTilesPool
   class Rooms < Base
 
-    def initialize( occupied_space )
+    def initialize()
+
       @tiles = []
       Dir.glob( 'tiles/rooms/*' ).each do |room|
-        @tiles << AvailableTile::Room.new( room, occupied_space )
+        next unless room == 'b_4_4.png'
+        @tiles << AvailableTile::Room.new( room )
       end
+
     end
 
   end
