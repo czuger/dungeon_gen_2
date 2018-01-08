@@ -68,7 +68,7 @@ class Hallway < Room
     miny = [ pos_1.y, pos_2.y ].min
     maxy = [ pos_1.y, pos_2.y ].max
 
-    ( pos_1.x - 1 .. pos_1.x + 1 ).each do |x|
+    ( pos_1.x .. pos_1.x ).each do |x|
       ( miny .. maxy ).each do |y|
         p = Position.new( x, y )
         if x == pos_1.x
@@ -88,7 +88,7 @@ class Hallway < Room
     minx = [ pos_1.x, pos_2.x ].min
     maxx = [ pos_1.x, pos_2.x ].max
 
-    ( pos_1.y - 1 .. pos_1.y + 1 ).each do |y|
+    ( pos_1.y .. pos_1.y ).each do |y|
       ( minx .. maxx ).each do |x|
         p = Position.new( x, y )
         if y == pos_1.y

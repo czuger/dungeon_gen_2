@@ -4,17 +4,22 @@ class RectRoom < Room
 
   attr_reader :room_center
 
+  ROOMS_SIZES = [ [ 2, 2 ], [ 2, 4 ], [ 4, 2 ], [ 4, 4 ] ]
+
   def initialize( nb_rooms )
 
     super()
 
-    distance = nb_rooms * 2
+    distance = nb_rooms * 1.5
     @room_distance = rand( 1 .. distance )
     @room_angle = rand( 0 .. 2*Math::PI )
 
     @room_center = Position.new( (@room_distance * Math.cos( @room_angle )).round( 0 ), (@room_distance * Math.sin( @room_angle )).round( 0 ) )
-    @room_height = rand( 4 .. 8 )
-    @room_width = rand( 4 .. 8 )
+
+    room_size = ROOMS_SIZES.sample
+
+    @room_height = room_size.first
+    @room_width = room_size.last
 
     draw_room
   end

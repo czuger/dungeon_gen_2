@@ -101,9 +101,9 @@ module DungeonBmpPrint
 
     gc.fill( 'white' )
 
-    pos = Position.new( w, h )
-    show_monster = pos.distance( @current_pos ) < Dungeon::WATCH_DISTANCE && @dungeon_content[ pos.hash_key ]
-    print_distance( gc, pos ) unless plain || show_monster
+    # pos = Position.new( w, h )
+    # show_monster = pos.distance( @current_pos ) < Dungeon::WATCH_DISTANCE && @dungeon_content[ pos.hash_key ]
+    # print_distance( gc, pos ) unless plain || show_monster
   end
 
   def print_distance( gc, pos )
