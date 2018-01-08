@@ -4,5 +4,5 @@ require_relative 'libs/dungeon'
 d = Dungeon.new
 d.generate
 
-d.to_image
+d.to_pic
 

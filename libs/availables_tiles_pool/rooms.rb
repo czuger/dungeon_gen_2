@@ -8,7 +8,8 @@ module AvailablesTilesPool
 
       @tiles = []
       Dir.glob( 'tiles/rooms/*' ).each do |room|
-        next unless room == 'b_4_4.png'
+        p room
+        next unless room =~ /b_4_4/
         @tiles << AvailableTile::Room.new( room )
       end
 

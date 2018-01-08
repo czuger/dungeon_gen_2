@@ -4,8 +4,8 @@ require_relative 'borders'
 
 class TileOnMap::Room < TileOnMap::Base
 
-  def initialize( tile, top, left )
-    super( tile, top, left )
+  def initialize( occupied_space, tile, top, left )
+    super( occupied_space, tile, top, left )
     @borders = Borders.new( self )
   end
 

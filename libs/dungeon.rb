@@ -16,14 +16,6 @@ class Dungeon
     place_room( room,0,0 )
   end
 
-  private
-
-  def place_room( room, top, left )
-    r = TileOnMap::Room.new( room, top, left )
-    r.connect_hallway
-    @placed_rooms << r
-  end
-
   def to_pic()
     min_left = max_left = min_top = max_top = 0
 
@@ -41,11 +33,21 @@ class Dungeon
         ( max_left + decal_left + 4 ) * 2 * AvailableTile::Base::TILE_SIZE,
         ( max_top + decal_top + 4 ) * 2 * AvailableTile::Base::TILE_SIZE )
 
+    p dungeon_image
+
     @tiles.each do |pr|
       dungeon_image = pr.draw( dungeon_image, decal_top, decal_left )
     end
 
     dungeon_image.write( 'out/dungeon.jpg' )
+  end
+
+  private
+
+  def place_room( room, top, left )
+    r = TileOnMap::Room.new( @occupied_spaces, room, top, left )
+    # r.connect_hallway
+    @tiles << r
   end
 
 end

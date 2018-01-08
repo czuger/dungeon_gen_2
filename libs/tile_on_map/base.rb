@@ -7,7 +7,7 @@ module TileOnMap
 
     include Magick
 
-    def initialize( tile, top, left )
+    def initialize( occupied_space, tile, top, left )
 
       @top = top
       @left = left
@@ -15,17 +15,17 @@ module TileOnMap
       @w = tile.w
       @h = tile.h
 
-      @hallways_pool = tile.hallways_pool
       @tile_image = tile.tile_image
-      @occupied_space = tile.occupied_space
 
-      @occupied_space.add_tile(self, top, left )
+      occupied_space.add_tile(self, top, left )
     end
 
     def draw( dungeon_image, decal_top, decal_left )
 
       p self
       @hallways&.each{ |h| dungeon_image = h.draw( dungeon_image ) }
+
+      p @tile_image
 
       dungeon_image = dungeon_image.composite( @tile_image,
          ( @left + decal_left ) * 2 * AvailableTile::Base::TILE_SIZE,
