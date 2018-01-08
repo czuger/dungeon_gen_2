@@ -3,10 +3,10 @@ require_relative 'libs/availables_tiles_pool/rooms'
 require_relative 'libs/availables_tiles_pool/hallways'
 require_relative 'libs/occupied_spaces'
 
-dungeon_width = 30
-dungeon_height = 30
+dungeon_width = 16
+dungeon_height = 16
 os = OccupiedSpaces.new
-dungeon_image = Magick::Image.new( dungeon_width * AvailableTile::Base::TILE_SIZE, dungeon_height * AvailableTile::Base::TILE_SIZE )
+dungeon_image = Magick::Image.new( dungeon_width * 2 * AvailableTile::Base::TILE_SIZE, dungeon_height * 2 * AvailableTile::Base::TILE_SIZE )
 rooms = AvailablesTilesPool::Rooms.new( os )
 hallways = AvailablesTilesPool::Hallways.new( os )
 
@@ -26,12 +26,12 @@ infinite_loop_protection = 1000
 
 while nb_rooms > 0 and infinite_loop_protection > 0
 
-  top = rand( 1 .. 22 )
-  left = rand( 1 .. 22 )
+  top = rand( 1 .. dungeon_height - 5 )
+  left = rand( 1 .. dungeon_width - 5 )
 
   room = rooms.sample
 
-  if os.free_space?( room, top, left, 3 )
+  if os.free_space?( room, top, left, 2 )
     placed_rooms << room.place( top, left )
     nb_rooms -= 1
   end

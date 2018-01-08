@@ -28,8 +28,8 @@ module TileOnMap
       @hallways&.each{ |h| dungeon_image = h.draw( dungeon_image ) }
 
       dungeon_image = dungeon_image.composite( @tile_image,
-         @left * AvailableTile::Base::TILE_SIZE,
-         @top * AvailableTile::Base::TILE_SIZE, OverCompositeOp )
+         @left * 2 * AvailableTile::Base::TILE_SIZE,
+         @top * 2 * AvailableTile::Base::TILE_SIZE, OverCompositeOp )
 
       @borders&.draw( dungeon_image )
 
