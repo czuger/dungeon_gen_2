@@ -104,8 +104,32 @@ class Hallway < Room
   end
 
   def get_rooms_midpoint( room1, room2 )
-    c1 = room1.room_center
+    c1 = room2.room_center
     c2 = room2.room_center
+
     Position.new( ( c1.x + c2.x ) / 2, ( c1.y + c2.y ) / 2 )
   end
+
+  def get_rooms_horizontal_midpoint( room1, room2 )
+
+    min_x = [ room1.bottom_right_x, room2.bottom_right_x ].max
+    max_x = [ room1.top_left_x, room2.top_left_x ].min
+
+    c1 = room2.room_center
+    c2 = room2.room_center
+
+    Position.new( ( min_x + max_x ) / 2, ( c1.y + c2.y ) / 2 )
+  end
+
+  def get_rooms_vertical_midpoint( room1, room2 )
+
+    min_y = [ room1.bottom_right_y, room2.bottom_right_y ].max
+    max_y = [ room1.top_left_y, room2.top_left_y ].min
+
+    c1 = room2.room_center
+    c2 = room2.room_center
+
+    Position.new( ( c1.x + c2.x ) / 2, ( min_y + max_y ) / 2 )
+  end
+
 end

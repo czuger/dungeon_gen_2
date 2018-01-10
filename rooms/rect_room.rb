@@ -37,11 +37,11 @@ class RectRoom < Room
   end
 
   def bottom_right_x
-    (@room_height/2.0).ceil + @room_center.x
+    (@room_height/2.0).floor + @room_center.x - 1
   end
 
   def bottom_right_y
-    (@room_width/2.0).ceil + @room_center.y
+    (@room_width/2.0).floor + @room_center.y - 1
   end
 
   def top_left_x
@@ -68,7 +68,7 @@ class RectRoom < Room
     ( top_left_x .. bottom_right_x ).each do |x|
       ( top_left_y .. bottom_right_y ).each do |y|
         room_element = :floor
-        room_element = :wall if x == top_left_x || x == bottom_right_x || y == top_left_y || y == bottom_right_y
+        # room_element = :wall if x == top_left_x || x == bottom_right_x || y == top_left_y || y == bottom_right_y
         @elements << RoomElement.new(Position.new(x, y ), room_element )
       end
     end
