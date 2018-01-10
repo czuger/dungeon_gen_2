@@ -22,6 +22,16 @@ class Position
     self.x == position.x && self.y == position.y
   end
 
+  # Rebase the x, y position according to the base_x, base_y new reference
+  #
+  # @param base_x [Integer] the x coordinate of the new base
+  # @param base_y [Integer] the y coordinate of the new base
+  #
+  def rebase( base_x, base_y )
+    @x -= base_x
+    @y -= base_y
+  end
+
   def adjacent_positions
     adj_pos = []
     ( -1 .. 1 ).each do |xadd|

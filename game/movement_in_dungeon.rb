@@ -19,7 +19,7 @@ module MovementInDungeon
           puts 'Bad order !!!'
         end
       end
-      print_dungeon_bmp
+      print_dungeon_limited_bmp
     end
 
   end

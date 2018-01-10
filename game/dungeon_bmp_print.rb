@@ -6,23 +6,44 @@ module DungeonBmpPrint
 
   include GetLineOfSight
 
-  def print_dungeon_bmp
+  def print_dungeon_full_bmp()
 
-    # compute_dungeon_corners
+    @picture_size = nil
+    compute_dungeon_corners
+    elements_to_cases
+
+    height = (@d_bottom_right_y - @d_top_left_y + 1) * DungeonBmpPrintPictureSize::SIZE
+    width = (@d_bottom_right_x - @d_top_left_x + 1) * DungeonBmpPrintPictureSize::SIZE
+
+    canvas = Magick::Image.new( width, height )
+
+    gc = Magick::Draw.new
+    gc.stroke( 'darkslateblue' )
+    gc.fill( 'white' )
+
+    @cases.each_pair  do |hash_key, case_content|
+
+      position = Position.from_hash_key( hash_key )
+      position.rebase( @d_top_left_x, @d_top_left_y )
+      draw_case( gc, position )
+    end
+
+    gc.draw( canvas )
+    canvas.write( 'out/dungeon_full.jpg' )
+  end
+
+  def print_dungeon_limited_bmp()
+
+    compute_dungeon_corners
     elements_to_cases
 
     @picture_size = DungeonBmpPrintPictureSize.new( @current_pos, @last_pos )
-
-    # x_distance = @d_top_left_x.abs + @d_bottom_right_x.abs + 1
-    # y_distance = @d_top_left_y.abs + @d_bottom_right_y.abs + 1
 
     canvas = Magick::Image.new( @picture_size.width, @picture_size.height )
 
     gc = Magick::Draw.new
     gc.stroke( 'darkslateblue' )
     gc.fill( 'white' )
-
-    # gc.rectangle( 10, 10, 50, 50 )
 
     @picture_size.each_case do |position|
       position_hash_key = position.hash_key
@@ -51,7 +72,7 @@ module DungeonBmpPrint
 
     draw_pos( gc )
     gc.draw( canvas )
-    canvas.write( 'out/dungeon.jpg' )
+    canvas.write( 'out/dungeon_lim.jpg' )
   end
 
   private
@@ -84,7 +105,7 @@ module DungeonBmpPrint
   def draw_case( gc, position, plain = false )
 
     # pp position
-    position = @picture_size.decal_case( position )
+    position = @picture_size.decal_case( position ) if @picture_size
     # pp position
 
     gc.fill( 'darkslateblue' ) if plain
