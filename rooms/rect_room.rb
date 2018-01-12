@@ -24,6 +24,10 @@ class RectRoom < Room
     draw_room
   end
 
+  def position_room( nb_rooms )
+
+  end
+
   def room_hash_keys_footprint
     @elements.map{ |r| r.position }.flatten.uniq.map{ |e| e.hash_key }
   end
