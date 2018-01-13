@@ -35,7 +35,7 @@ module RoomGeneration
       room_angle = 0
       distance = 4
       loop do
-        room_angle += rand( 0 .. Math::PI/4 )
+        room_angle += rand( 0 .. Math::PI/8 )
         if room_angle >= 2*Math::PI
           distance += 1
           room_angle = 0
@@ -44,7 +44,7 @@ module RoomGeneration
         room.move_room( room_angle, distance )
         lowest_distance = closest_position( room )
         p "nearest_room_distance = #{lowest_distance}"
-        break if lowest_distance >= rand( 3 .. 5 )
+        break if lowest_distance >= rand( 3 .. 6 )
       end
     end
 
