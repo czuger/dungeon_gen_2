@@ -21,6 +21,8 @@ module DungeonBmpPrint
     gc.stroke( 'darkslateblue' )
     gc.fill( 'white' )
 
+    p @cases
+
     @cases.each_pair  do |hash_key, case_content|
 
       position = Position.from_hash_key( hash_key )

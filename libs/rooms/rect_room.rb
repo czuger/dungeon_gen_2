@@ -6,19 +6,19 @@ class RectRoom < Room
 
   ROOMS_SIZES = [ [ 2, 2 ], [ 2, 4 ], [ 4, 2 ], [ 4, 4 ] ]
 
-  def position_room( nb_rooms )
-    distance = nb_rooms * 1.5
-    @room_distance = rand( 1 .. distance )
-    @room_angle = rand( 0 .. 2*Math::PI )
-
-    @room_center = Position.new( (@room_distance * Math.cos( @room_angle )).round( 0 ), (@room_distance * Math.sin( @room_angle )).round( 0 ) )
+  def initialize
+    @elements = []
 
     room_size = ROOMS_SIZES.sample
 
     @room_height = room_size.first
     @room_width = room_size.last
 
-    draw_room
+    @room_center = Position.new( 0, 0 )
+  end
+
+  def move_room( room_angle, room_distance )
+    @room_center = Position.new( (room_distance * Math.cos( room_angle )).round( 0 ), (room_distance * Math.sin( room_angle )).round( 0 ) )
   end
 
   def room_hash_keys_footprint
@@ -57,7 +57,15 @@ class RectRoom < Room
     @elements.map{ |e| e.position.y }.uniq
   end
 
-  private
+  # Return the diagonal room size, used for room placement
+  def diagonal_size
+    Math.sqrt( @room_height * @room_height + @room_width * @room_width ).round(0)
+  end
+
+  # Compute the distance between two rooms (in cases) used in room placement
+  def distance( room )
+    @room_center.distance( room.room_center )
+  end
 
   def draw_room
     top_left_x, top_left_y, bottom_right_x, bottom_right_y = room_corners

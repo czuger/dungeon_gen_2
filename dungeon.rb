@@ -5,6 +5,7 @@ require_relative 'libs/rooms/rect_room'
 require_relative 'libs/rooms/rooms_connection'
 require_relative 'libs/game/dungeon_bmp_print'
 require_relative 'libs/game/movement_in_dungeon'
+require_relative 'libs/generation/room_generation'
 require 'set'
 
 class Dungeon
@@ -13,6 +14,7 @@ class Dungeon
   include DungeonBmpPrint
   include RoomsConnection
   include MovementInDungeon
+  include RoomGeneration
 
   WATCH_DISTANCE=4
 
@@ -26,23 +28,25 @@ class Dungeon
     puts "Dungeon seed = #{seed}"
     srand( seed )
 
-    # The cases really occuped by the room
-    @occuped_cases = Set.new
-    # The cases around the room to avoid accoladed rooms
-    @room_phantom_cases = Set.new
+    create_rooms( 20 )
 
-    @rooms = []
-    @hallways = []
-
-    while( @rooms.count < nb_rooms ) do
-      room = RectRoom.new
-      room.position_room( nb_rooms )
-      if ( @occuped_cases & room.room_hash_keys_footprint ).empty? && ( @room_phantom_cases & room.room_hash_keys_phantom ).empty?
-        @rooms << room
-        @occuped_cases += room.room_hash_keys_footprint
-        @room_phantom_cases += room.room_hash_keys_phantom
-      end
-    end
+    # # The cases really occuped by the room
+    # @occuped_cases = Set.new
+    # # The cases around the room to avoid accoladed rooms
+    # @room_phantom_cases = Set.new
+    #
+    # @rooms = []
+    # @hallways = []
+    #
+    # while( @rooms.count < nb_rooms ) do
+    #   room = RectRoom.new
+    #   room.position_room( nb_rooms )
+    #   if ( @occuped_cases & room.room_hash_keys_footprint ).empty? && ( @room_phantom_cases & room.room_hash_keys_phantom ).empty?
+    #     @rooms << room
+    #     @occuped_cases += room.room_hash_keys_footprint
+    #     @room_phantom_cases += room.room_hash_keys_phantom
+    #   end
+    # end
 
     # connect_rooms
 
@@ -101,9 +105,9 @@ class Dungeon
     @rooms.each do |room|
       room.set_cases( @cases )
     end
-    @hallways.each do |hallway|
-      hallway.set_cases( @cases )
-    end
+    # @hallways.each do |hallway|
+    #   hallway.set_cases( @cases )
+    # end
   end
 
   # def move_into_dungeon( exit_number )
