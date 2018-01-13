@@ -32,15 +32,19 @@ module RoomGeneration
   # Choose a random direction and move the room until it is fare engough from other rooms.
   def move_room(room )
     unless @rooms.empty?
-      room_angle = rand( 0 .. 2*Math::PI )
+      room_angle = 0
       distance = 4
       loop do
-        distance += 1
-        p distance
+        room_angle += rand( 0 .. Math::PI/4 )
+        if room_angle >= 2*Math::PI
+          distance += 1
+          room_angle = 0
+        end
+        p "distance = #{distance}"
         room.move_room( room_angle, distance )
-        _, nearest_room_distance = nearest_room( room )
-        p nearest_room_distance
-        break if nearest_room_distance > room.diagonal_size * 1.5
+        lowest_distance = closest_position( room )
+        p "nearest_room_distance = #{lowest_distance}"
+        break if lowest_distance >= rand( 3 .. 5 )
       end
     end
 
@@ -48,22 +52,16 @@ module RoomGeneration
 
   end
 
-  # Compute the nearest room for the current room
-  # Return the room and the distance of the room
-  def nearest_room( current_room )
-    tmp_rooms = @rooms.clone
-    nearest_room = room = tmp_rooms.shift
-    lowest_distance = room.distance( current_room )
-    until tmp_rooms.empty?
-      p tmp_rooms
-      distance = current_room.distance( room )
-      if distance < lowest_distance
-        nearest_room = room
-        lowest_distance = distance
-      end
-      room = tmp_rooms.shift
+  # Compute the distance to the closes element of the closest room from the current room.
+  def closest_position( current_room )
+    lowest_distance = Float::INFINITY
+    @rooms.each do |room|
+      closest_distance = current_room.closest_distance( room )
+
+      lowest_distance = [ closest_distance, lowest_distance ].min
+      break if lowest_distance <= 0
     end
-    [ nearest_room, lowest_distance ]
+    lowest_distance
   end
 
 end

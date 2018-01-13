@@ -2,7 +2,7 @@ require_relative 'room'
 
 class RectRoom < Room
 
-  attr_reader :room_center
+  attr_reader :room_center, :elements
 
   ROOMS_SIZES = [ [ 2, 2 ], [ 2, 4 ], [ 4, 2 ], [ 4, 4 ] ]
 
@@ -15,10 +15,13 @@ class RectRoom < Room
     @room_width = room_size.last
 
     @room_center = Position.new( 0, 0 )
+    draw_room
   end
 
   def move_room( room_angle, room_distance )
     @room_center = Position.new( (room_distance * Math.cos( room_angle )).round( 0 ), (room_distance * Math.sin( room_angle )).round( 0 ) )
+    @elements = []
+    draw_room
   end
 
   def room_hash_keys_footprint
@@ -65,6 +68,21 @@ class RectRoom < Room
   # Compute the distance between two rooms (in cases) used in room placement
   def distance( room )
     @room_center.distance( room.room_center )
+  end
+
+  # Return the distance of the closest elements of two rooms
+  def closest_distance( room )
+    lowest_distance = Float::INFINITY
+
+    @elements.each do |e1|
+      room.elements.each do |e2|
+        distance = e1.position.distance( e2.position )
+        # puts "In rect_room.closes_distance. distance = #{distance}"
+        lowest_distance = [ distance, lowest_distance ].min
+      end
+    end
+
+    lowest_distance
   end
 
   def draw_room
