@@ -6,10 +6,7 @@ class RectRoom < Room
 
   ROOMS_SIZES = [ [ 2, 2 ], [ 2, 4 ], [ 4, 2 ], [ 4, 4 ] ]
 
-  def initialize( nb_rooms )
-
-    super()
-
+  def position_room( nb_rooms )
     distance = nb_rooms * 1.5
     @room_distance = rand( 1 .. distance )
     @room_angle = rand( 0 .. 2*Math::PI )
@@ -22,10 +19,6 @@ class RectRoom < Room
     @room_width = room_size.last
 
     draw_room
-  end
-
-  def position_room( nb_rooms )
-
   end
 
   def room_hash_keys_footprint

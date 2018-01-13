@@ -1,4 +1,4 @@
-require_relative 'room'
+require_relative 'rooms/room'
 
 class Hallway < Room
 

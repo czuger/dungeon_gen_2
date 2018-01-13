@@ -2,7 +2,7 @@ require_relative '../kruskal/graph'
 require_relative '../kruskal/node'
 require_relative '../kruskal/edge'
 require_relative '../kruskal/kruskal'
-require_relative 'hallway'
+require_relative '../hallway'
 
 module RoomsConnection
 
