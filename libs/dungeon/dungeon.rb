@@ -1,11 +1,11 @@
 require 'pp'
-require_relative 'libs/position'
-require_relative 'libs/game/dungeon_ascii_print'
-require_relative 'libs/rooms/rect_room'
-require_relative 'libs/rooms/rooms_connection'
-require_relative 'libs/game/dungeon_bmp_print'
-require_relative 'libs/game/movement_in_dungeon'
-require_relative 'libs/generation/room_generation'
+require_relative '../../libs/position'
+require_relative '../../libs/game/dungeon_ascii_print'
+require_relative '../../libs/rooms/room'
+require_relative '../../libs/rooms/rooms_connection'
+require_relative '../../libs/game/dungeon_bmp_print'
+require_relative '../../libs/game/movement_in_dungeon'
+require_relative '../../libs/generation/room_generation'
 require 'set'
 
 class Dungeon
@@ -23,10 +23,13 @@ class Dungeon
   def initialize( nb_rooms )
 
     superseed = nil
-    superseed = 306001694568331467489664544663660634765
+    superseed = 311593924271807075583079921132683299447
     seed = superseed ? superseed : Random.new_seed
     puts "Dungeon seed = #{seed}"
     srand( seed )
+
+    # The cases really occuped by the room
+    @occuped_cases = Set.new
 
     create_rooms( 20 )
     connect_rooms
@@ -98,7 +101,7 @@ class Dungeon
   #   puts 'Entrez la direction de la porte (0 = top, 1 = bottom, 2 = left, 3 = right)'
   #   num = gets.chomp
   #   @current_position.set_direction( num.to_i )
-  #   @current_room = Room.new( self, @current_position )
+  #   @current_room = DungeonElement.new( self, @current_position )
   # end
 
   def compute_dungeon_corners
@@ -116,9 +119,5 @@ class Dungeon
 
 end
 
-d = Dungeon.new( 16 )
-d.print_dungeon_ascii
-# d.print_dungeon_limited_bmp
-d.print_dungeon_full_bmp
 
 

@@ -1,6 +1,6 @@
 require_relative 'rooms/room'
 
-class Hallway < Room
+class Hallway < DungeonElement
 
   # TODO : have a look there http://www.gamasutra.com/blogs/AAdonaac/20150903/252889/Procedural_Dungeon_Generation_Algorithm.php
   # They explain how to make cornered hallways

@@ -1,18 +1,12 @@
-require_relative '../rooms/rect_room'
+require_relative '../rooms/room'
 
 module RoomGeneration
 
   def create_rooms( max_rooms )
-
-    # The cases really occuped by the room
-    @occuped_cases = Set.new
-    # The cases around the room to avoid accoladed rooms
-    # @room_phantom_cases = Set.new
-
     @rooms = []
 
     1.upto( max_rooms ) do
-      room = RectRoom.new
+      room = Room.new
       move_room(room )
       @rooms << room
       room.finalize_room_position( self )

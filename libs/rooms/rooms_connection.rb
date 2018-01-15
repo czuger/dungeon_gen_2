@@ -25,7 +25,7 @@ module RoomsConnection
     nodes = []
 
     @rooms.each_index do |index|
-      node = Node.new( "Room ##{index}" )
+      node = Node.new( "DungeonElement ##{index}" )
       nodes << node
       graph.add_node( node )
     end
