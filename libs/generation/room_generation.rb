@@ -7,7 +7,7 @@ module RoomGeneration
     # The cases really occuped by the room
     @occuped_cases = Set.new
     # The cases around the room to avoid accoladed rooms
-    @room_phantom_cases = Set.new
+    # @room_phantom_cases = Set.new
 
     @rooms = []
 
@@ -15,6 +15,7 @@ module RoomGeneration
       room = RectRoom.new
       move_room(room )
       @rooms << room
+      room.finalize_room_position( self )
     end
     # while( @rooms.count < nb_rooms ) do
     #
@@ -46,11 +47,9 @@ module RoomGeneration
         # p "nearest_room_distance = #{lowest_distance}"
         break if lowest_distance >= rand( 3 .. 6 )
       end
-      room.finalize_room_position( self )
     end
 
     room.draw_room
-
   end
 
   # Compute the distance to the closes element of the closest room from the current room.

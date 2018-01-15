@@ -29,25 +29,6 @@ class Dungeon
     srand( seed )
 
     create_rooms( 20 )
-
-    # # The cases really occuped by the room
-    # @occuped_cases = Set.new
-    # # The cases around the room to avoid accoladed rooms
-    # @room_phantom_cases = Set.new
-    #
-    # @rooms = []
-    @hallways = []
-    #
-    # while( @rooms.count < nb_rooms ) do
-    #   room = RectRoom.new
-    #   room.position_room( nb_rooms )
-    #   if ( @occuped_cases & room.room_hash_keys_footprint ).empty? && ( @room_phantom_cases & room.room_hash_keys_phantom ).empty?
-    #     @rooms << room
-    #     @occuped_cases += room.room_hash_keys_footprint
-    #     @room_phantom_cases += room.room_hash_keys_phantom
-    #   end
-    # end
-
     connect_rooms
 
     # @last_pos = @rooms.first.room_center.clone
