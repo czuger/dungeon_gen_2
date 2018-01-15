@@ -17,15 +17,6 @@ module RoomGeneration
       @rooms << room
       room.finalize_room_position( self )
     end
-    # while( @rooms.count < nb_rooms ) do
-    #
-    #   room.position_room( nb_rooms )
-    #   if ( @occuped_cases & room.room_hash_keys_footprint ).empty? && ( @room_phantom_cases & room.room_hash_keys_phantom ).empty?
-    #     @rooms << room
-    #     @occuped_cases += room.room_hash_keys_footprint
-    #     @room_phantom_cases += room.room_hash_keys_phantom
-    #   end
-    # end
   end
 
   private

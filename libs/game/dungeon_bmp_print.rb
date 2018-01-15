@@ -109,7 +109,7 @@ module DungeonBmpPrint
     position = @picture_size.decal_case( position ) if @picture_size
     # pp position
 
-    gc.fill( 'darkslateblue' ) if plain
+    gc.fill( 'orange' ) if plain
 
     minx = position.x * DungeonBmpPrintPictureSize::SIZE
     maxx = ( position.x + 1 ) * DungeonBmpPrintPictureSize::SIZE
@@ -121,7 +121,7 @@ module DungeonBmpPrint
     gc.line( minx + DungeonBmpPrintPictureSize::SIZE / 2, miny, minx + DungeonBmpPrintPictureSize::SIZE / 2, maxy )
     gc.line( minx, miny + DungeonBmpPrintPictureSize::SIZE / 2, maxx, miny + DungeonBmpPrintPictureSize::SIZE / 2 )
 
-    gc.fill( 'white' )
+    gc.fill( 'green' )
 
     # pos = Position.new( w, h )
     # show_monster = pos.distance( @current_pos ) < Dungeon::WATCH_DISTANCE && @dungeon_content[ pos.hash_key ]
