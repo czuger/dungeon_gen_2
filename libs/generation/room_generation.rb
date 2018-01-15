@@ -46,6 +46,7 @@ module RoomGeneration
         # p "nearest_room_distance = #{lowest_distance}"
         break if lowest_distance >= rand( 3 .. 6 )
       end
+      room.finalize_room_position( self )
     end
 
     room.draw_room

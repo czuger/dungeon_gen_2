@@ -96,4 +96,12 @@ class RectRoom < Room
     end
   end
 
+  # This method is used to finalize the room position. It definitively mark the room cases as occupied.
+  # Required for hallway positions.
+  def finalize_room_position( dungeon )
+    @elements.each do |element|
+      dungeon.set_case_occuped( element.position )
+    end
+  end
+
 end

@@ -23,7 +23,7 @@ class Dungeon
   def initialize( nb_rooms )
 
     superseed = nil
-    # superseed = 227363164522134968962419981135215379863
+    superseed = 306001694568331467489664544663660634765
     seed = superseed ? superseed : Random.new_seed
     puts "Dungeon seed = #{seed}"
     srand( seed )
@@ -92,11 +92,13 @@ class Dungeon
 
   end
 
-  def case_occuped?( hash_key )
-    @occuped_cases.include?(hash_key )
+  def case_occuped?( pos )
+    raise unless pos.is_a? Position
+    @occuped_cases.include?( pos.hash_key )
   end
 
   def set_case_occuped( pos )
+    raise unless pos.is_a? Position
     @occuped_cases << pos.hash_key
   end
 
