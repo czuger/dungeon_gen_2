@@ -90,8 +90,7 @@ class RectRoom < Room
 
     ( top_left_x .. bottom_right_x ).each do |x|
       ( top_left_y .. bottom_right_y ).each do |y|
-        room_element = :floor
-        # room_element = :wall if x == top_left_x || x == bottom_right_x || y == top_left_y || y == bottom_right_y
+        room_element = :room
         @elements << RoomElement.new(Position.new(x, y ), room_element )
       end
     end

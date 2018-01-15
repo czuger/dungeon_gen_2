@@ -71,12 +71,9 @@ class Hallway < Room
     ( pos_1.x .. pos_1.x ).each do |x|
       ( miny .. maxy ).each do |y|
         p = Position.new( x, y )
-        if x == pos_1.x
-          @elements << RoomElement.new( p, :floor )
-          @hallway_floors_positions << p
-        else
-          @elements << RoomElement.new( p, :wall ) unless @dungeon.case_occuped?( p.hash_key )
-        end
+        next if @dungeon.case_occuped?( p )
+        @elements << RoomElement.new( p, :hall )
+        @hallway_floors_positions << p
         @dungeon.set_case_occuped( p )
       end
     end
@@ -91,13 +88,9 @@ class Hallway < Room
     ( pos_1.y .. pos_1.y ).each do |y|
       ( minx .. maxx ).each do |x|
         p = Position.new( x, y )
-        if y == pos_1.y
-          @elements << RoomElement.new( p, :floor )
-          @hallway_floors_positions << p
-        else
-          p = Position.new( x, y )
-          @elements << RoomElement.new( p, :wall ) unless @dungeon.case_occuped?( p.hash_key )
-        end
+        next if @dungeon.case_occuped?( p )
+        @elements << RoomElement.new( p, :hall )
+        @hallway_floors_positions << p
         @dungeon.set_case_occuped( p )
       end
     end

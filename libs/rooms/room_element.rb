@@ -1,6 +1,6 @@
 class RoomElement
 
-  TYPES = [ :floor, :wall ]
+  TYPES = [ :hall, :room ]
 
   attr_reader :position, :element_type
 

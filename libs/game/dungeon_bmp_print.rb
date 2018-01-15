@@ -24,10 +24,9 @@ module DungeonBmpPrint
     p @cases
 
     @cases.each_pair  do |hash_key, case_content|
-
       position = Position.from_hash_key( hash_key )
       position.rebase( @d_top_left_x, @d_top_left_y )
-      draw_case( gc, position )
+      draw_case( gc, position, case_content == :room )
     end
 
     gc.draw( canvas )

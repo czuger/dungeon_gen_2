@@ -36,7 +36,7 @@ class Dungeon
     # @room_phantom_cases = Set.new
     #
     # @rooms = []
-    # @hallways = []
+    @hallways = []
     #
     # while( @rooms.count < nb_rooms ) do
     #   room = RectRoom.new
@@ -48,7 +48,7 @@ class Dungeon
     #   end
     # end
 
-    # connect_rooms
+    connect_rooms
 
     # @last_pos = @rooms.first.room_center.clone
     # @current_pos = @rooms.first.room_center.clone
@@ -105,9 +105,9 @@ class Dungeon
     @rooms.each do |room|
       room.set_cases( @cases )
     end
-    # @hallways.each do |hallway|
-    #   hallway.set_cases( @cases )
-    # end
+    @hallways.each do |hallway|
+      hallway.set_cases( @cases )
+    end
   end
 
   # def move_into_dungeon( exit_number )
