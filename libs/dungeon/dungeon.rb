@@ -20,18 +20,12 @@ class Dungeon
 
   attr_reader :current_room
 
-  def initialize( nb_rooms )
-
-    superseed = nil
-    superseed = 311593924271807075583079921132683299447
-    seed = superseed ? superseed : Random.new_seed
-    puts "Dungeon seed = #{seed}"
-    srand( seed )
+  def initialize( max_room=20 )
 
     # The cases really occuped by the room
     @occuped_cases = Set.new
 
-    create_rooms( 20 )
+    create_rooms( max_room )
     connect_rooms
 
     # @last_pos = @rooms.first.room_center.clone

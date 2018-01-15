@@ -23,7 +23,7 @@ module RoomGeneration
       loop do
         room_angle += rand( 0 .. Math::PI/8 )
         if room_angle >= 2*Math::PI
-          distance += 1
+          distance += 2
           room_angle = 0
         end
         # p "distance = #{distance}"
