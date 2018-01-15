@@ -9,7 +9,10 @@ module RoomsConnection
   def connect_rooms
     @hallways = []
 
+    p @rooms
+
     edge_hash = get_spanning_tree
+    p edge_hash
     edge_hash.each_pair do |source_room_id, values|
       values.each do |target_room_id|
         @hallways << Hallway.new( self, @rooms[ source_room_id ], @rooms[ target_room_id ] )
@@ -25,7 +28,8 @@ module RoomsConnection
     nodes = []
 
     @rooms.each_index do |index|
-      node = Node.new( "DungeonElement ##{index}" )
+      # p index
+      node = Node.new( "Room ##{index}" )
       nodes << node
       graph.add_node( node )
     end
