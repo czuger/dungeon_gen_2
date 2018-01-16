@@ -6,10 +6,10 @@ class Room < DungeonElement
 
   ROOMS_SIZES = [ [ 2, 2 ], [ 2, 4 ], [ 4, 2 ], [ 4, 4 ] ]
 
-  def initialize
+  def initialize( room_size )
     @elements = []
 
-    room_size = ROOMS_SIZES.sample
+    room_size = room_size || ROOMS_SIZES.sample
 
     @room_height = room_size.first
     @room_width = room_size.last
@@ -61,6 +61,7 @@ class Room < DungeonElement
   end
 
   # Return the diagonal room size, used for room placement
+  # No more used
   def diagonal_size
     Math.sqrt( @room_height * @room_height + @room_width * @room_width ).round(0)
   end
