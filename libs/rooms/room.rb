@@ -1,4 +1,5 @@
 require_relative '../dungeon/dungeon_element'
+require_relative '../position'
 
 class Room < DungeonElement
 
@@ -6,7 +7,7 @@ class Room < DungeonElement
 
   ROOMS_SIZES = [ [ 2, 2 ], [ 2, 4 ], [ 4, 2 ], [ 4, 4 ] ]
 
-  def initialize( room_size )
+  def initialize( room_size, position: nil )
     @elements = []
 
     room_size = room_size || ROOMS_SIZES.sample
@@ -14,7 +15,8 @@ class Room < DungeonElement
     @room_height = room_size.first
     @room_width = room_size.last
 
-    @room_center = Position.new( 0, 0 )
+    @room_center = position || Position.new( 0, 0 )
+
     draw_room
   end
 
