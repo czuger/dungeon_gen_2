@@ -1,17 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    power_assert (0.4.1)
-    rmagick (2.15.4)
-    test-unit (3.2.3)
-      power_assert
+    minitest (5.11.1)
+    rmagick (2.16.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  minitest
   rmagick
-  test-unit
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

@@ -1,7 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
 require_relative '../libs/rooms/room'
 
-class RoomTest < Test::Unit::TestCase
+class RoomTest < Minitest::Test
 
   # Called before every test method runs. Can be used
   # to set up fixture information.
