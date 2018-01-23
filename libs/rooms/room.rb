@@ -74,6 +74,8 @@ class Room < DungeonElement
   end
 
   # Return the distance of the closest elements of two rooms
+  # TODO : change the algo. Start from the begigning of each room, then if other center is over first center other center y-1, first center y+1, opposite if under
+  # Same for x coord (left, right)
   def closest_distance( room )
     lowest_distance = Float::INFINITY
 
